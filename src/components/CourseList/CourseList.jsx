@@ -1,14 +1,23 @@
-import React from "react";
-import Course from "../Course/Course";
-import "./CourseList.css";
+import React, { useState } from 'react';
+import Course from '../Course/Course';
+import TermFilter from '../TermFilter/TermFilter';
+import './CourseList.css';
 
 const CourseList = ({ courses }) => {
+  const [term, setTerm] = useState('Fall');
+  const termCourses = Object.values(courses).filter(
+    (course) => course.term === term
+  );
+
   return (
-    <div className="course-list">
-      {Object.values(courses).map((course, idx) => (
-        <Course course={course} key={idx} />
-      ))}
-    </div>
+    <>
+      <TermFilter term={term} setTerm={setTerm} />
+      <div className="course-list">
+        {Object.values(termCourses).map((course, idx) => (
+          <Course key={idx} course={course} />
+        ))}
+      </div>
+    </>
   );
 };
 

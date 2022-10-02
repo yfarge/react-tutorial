@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
 import Banner from './components/Banner/Banner';
 import CourseList from './components/CourseList/CourseList';
+import TermFilter from './components/TermFilter/TermFilter';
 import { useJsonQuery } from './utilities/fetch';
 
 const App = () => {
