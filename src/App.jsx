@@ -14,10 +14,10 @@ const App = () => {
   if (!data) return <h1>No user data found</h1>;
 
   return (
-    <>
+    <div style={{ margin: '2rem' }}>
       <Banner title={data.title} />
       <CourseList courses={data.courses} />
-    </>
+    </div>
   );
 };
 

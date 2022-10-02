@@ -1,11 +1,12 @@
 .container {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  border: solid 1px #E6E6E6;
+  border: solid 1px #e6e6e6;
   padding: 1rem;
   width: 10rem;
   height: 12rem;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .course-header {
@@ -18,7 +19,7 @@
 }
 
 .course-meets {
-  border-top: 1px solid #E6E6E6;
+  border-top: 1px solid #e6e6e6;
   padding: 0.5rem;
   margin: 0;
   justify-content: center;
