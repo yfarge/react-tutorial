@@ -1,0 +1,26 @@
+.container {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  border: solid 1px #E6E6E6;
+  padding: 1rem;
+  width: 10rem;
+  height: 12rem;
+  border-radius: 8px;
+}
+
+.course-header {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.course-title {
+  margin: 0;
+}
+
+.course-meets {
+  border-top: 1px solid #E6E6E6;
+  padding: 0.5rem;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+}

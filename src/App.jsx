@@ -1,5 +1,5 @@
-import Banner from "./components/Banner";
-import CourseList from "./components/CourseList";
+import Banner from "./components/Banner/Banner";
+import CourseList from "./components/CourseList/CourseList";
 const schedule = {
   title: "CS Courses for 2018-2019",
   courses: {
