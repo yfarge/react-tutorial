@@ -2,17 +2,70 @@ import React, { useState } from 'react';
 import Course from '../Course/Course';
 import TermFilter from '../TermFilter/TermFilter';
 import './CourseList.css';
+import ScheduleModal from '../ScheduleModal/ScheduleModal';
 
 const CourseList = ({ courses }) => {
   const [term, setTerm] = useState('Fall');
   const [selected, setSelected] = useState([]);
+  const [open, setOpen] = useState(false);
+  const openSchedule = () => setOpen(true);
+  const closeSchedule = () => setOpen(false);
   const termCourses = Object.values(courses).filter(
     (course) => course.term === term
   );
 
   return (
-    <>
-      <TermFilter term={term} setTerm={setTerm} />
+    <div>
+      <nav className="course-navigator">
+        <TermFilter term={term} setTerm={setTerm} />
+        <button className="course-planner-button" onClick={openSchedule}>
+          Course Plan
+        </button>
+      </nav>
+      <ScheduleModal open={open} close={closeSchedule}>
+        <div
+          style={{
+            flex: '1 1 auto',
+            overflowY: 'auto',
+          }}
+        >
+          {selected.length ? (
+            selected.map((course) => (
+              <div
+                key={course.term + course.number}
+                style={{
+                  padding: '15px 30px',
+                  fontSize: '16px',
+                  borderBottom: 'solid 1px lightgrey',
+                }}
+              >
+                <div>
+                  <b>
+                    {course.term} {course.number}:{' '}
+                  </b>
+                  {course.title}
+                </div>
+                <div>{course.meets}</div>
+              </div>
+            ))
+          ) : (
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100%',
+              }}
+            >
+              <b style={{ fontSize: '20px' }}>No courses selected...</b>
+              <p style={{ color: 'grey' }}>
+                Click on a course to add it to your planner!
+              </p>
+            </div>
+          )}
+        </div>
+      </ScheduleModal>
       <div className="course-list">
         {Object.values(termCourses).map((course, idx) => (
           <Course
@@ -23,7 +76,7 @@ const CourseList = ({ courses }) => {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

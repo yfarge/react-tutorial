@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
 import Banner from './components/Banner/Banner';
 import CourseList from './components/CourseList/CourseList';
-import TermFilter from './components/TermFilter/TermFilter';
 import { useJsonQuery } from './utilities/fetch';
 
 const App = () => {
@@ -14,7 +12,13 @@ const App = () => {
   if (!data) return <h1>No user data found</h1>;
 
   return (
-    <div style={{ margin: '2rem' }}>
+    <div
+      style={{
+        padding: '2rem',
+        height: '100%',
+        position: 'relative',
+      }}
+    >
       <Banner title={data.title} />
       <CourseList courses={data.courses} />
     </div>

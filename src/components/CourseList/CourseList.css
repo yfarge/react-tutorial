@@ -1,3 +1,24 @@
+.course-navigator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.course-planner-button {
+  padding: 10px 30px;
+  font-size: 16px;
+  border: solid 1px grey;
+  border-radius: 4px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.course-planner-button:hover {
+  background-color: lightgrey;
+}
+
 .course-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, 14rem);

@@ -1,0 +1,44 @@
+.modal {
+  display: none;
+}
+
+.modal-show {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(169, 169, 169, 0.5);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 50%;
+  margin: auto;
+  margin-top: 5%;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.modal-show .modal-content {
+  opacity: 1;
+  transition: 0.2s linear;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+  border-bottom: solid 1px lightgrey;
+}
+
+.close-btn:after {
+  display: inline-block;
+  content: '\00d7'; /* This will render the 'X' */
+  cursor: pointer;
+}
