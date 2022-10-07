@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Course from '../Course/Course';
 import TermFilter from '../TermFilter/TermFilter';
 import './CourseList.css';
-import ScheduleModal from '../ScheduleModal/ScheduleModal';
+import Modal from '../Modal/Modal';
 
 const CourseList = ({ courses }) => {
   const [term, setTerm] = useState('Fall');
@@ -22,7 +22,7 @@ const CourseList = ({ courses }) => {
           Course Plan
         </button>
       </nav>
-      <ScheduleModal open={open} close={closeSchedule}>
+      <Modal title="Course Plan" open={open} close={closeSchedule}>
         <div
           style={{
             flex: '1 1 auto',
@@ -65,7 +65,7 @@ const CourseList = ({ courses }) => {
             </div>
           )}
         </div>
-      </ScheduleModal>
+      </Modal>
       <div className="course-list">
         {Object.values(termCourses).map((course, idx) => (
           <Course

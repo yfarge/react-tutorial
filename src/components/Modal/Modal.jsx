@@ -1,6 +1,6 @@
-import './ScheduleModal.css';
+import './Modal.css';
 
-const ScheduleModal = ({ children, open, close }) => (
+const Modal = ({ title, children, open, close }) => (
   <div
     className={`${open ? 'modal-show' : 'modal'}`}
     tabIndex="-1"
@@ -11,7 +11,7 @@ const ScheduleModal = ({ children, open, close }) => (
   >
     <div className="modal-content">
       <div className="modal-header">
-        <h2>Course Plan</h2>
+        <h2>{title}</h2>
         <div
           role="button"
           className="close-btn"
@@ -25,4 +25,4 @@ const ScheduleModal = ({ children, open, close }) => (
   </div>
 );
 
-export default ScheduleModal;
+export default Modal;
