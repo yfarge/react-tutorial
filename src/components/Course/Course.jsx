@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { hasConflict } from '../../utilities/times';
 import CourseForm from '../CourseForm/CourseForm';
 import './Course.css';
 
@@ -7,17 +7,26 @@ const Course = ({ course, selected, setSelected }) => {
   const [open, setOpen] = useState(false);
   const openForm = () => setOpen(true);
   const closeForm = () => setOpen(false);
-  const isSelected = selected.some((element) => element === course);
+  const isSelected = selected.includes(course);
+  const isDisabled = !isSelected && hasConflict(course, selected);
   const toggle = () =>
     isSelected
       ? setSelected(selected.filter((val) => val != course))
       : setSelected([...selected, course]);
 
+  const style = {
+    backgroundColor: isDisabled
+      ? 'lightgrey'
+      : isSelected
+      ? '#B0E5A4'
+      : 'white',
+  };
+
   return (
     <div
       className="container"
-      onClick={toggle}
-      style={isSelected ? { backgroundColor: 'lightgreen' } : {}}
+      onClick={() => !isDisabled && toggle()}
+      style={style}
     >
       <h3
         style={{ display: 'flex', justifyContent: 'space-between' }}

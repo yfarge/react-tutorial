@@ -1,6 +1,8 @@
 import Banner from './components/Banner/Banner';
 import CourseList from './components/CourseList/CourseList';
 import { useJsonQuery } from './utilities/fetch';
+import { mapValues } from './utilities/schedule-helpers';
+import { addCourseTimes } from './utilities/times';
 
 const App = () => {
   const [data, isLoading, error] = useJsonQuery(
@@ -20,7 +22,7 @@ const App = () => {
       }}
     >
       <Banner title={data.title} />
-      <CourseList courses={data.courses} />
+      <CourseList courses={mapValues(addCourseTimes, data.courses)} />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from '../Modal/Modal';
 
 const CourseForm = ({ course, open, close }) => {
@@ -13,7 +13,6 @@ const CourseForm = ({ course, open, close }) => {
             style={{ width: '80%' }}
             id="course-title-input"
             type="text"
-            value={course.title}
           />
         </div>
         <div
@@ -24,7 +23,6 @@ const CourseForm = ({ course, open, close }) => {
             style={{ width: '80%' }}
             id="course-meeting-input"
             type="text"
-            value={course.meets}
           />
         </div>
       </form>
