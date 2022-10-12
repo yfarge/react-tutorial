@@ -7,9 +7,7 @@
   height: 12rem;
   margin: 0;
   border-radius: 8px;
-  cursor: pointer;
   transition: all 0.1s ease-in-out;
-
 }
 
 .container:hover {
@@ -31,4 +29,15 @@
   margin: 0;
   justify-content: center;
   align-items: center;
+}
+
+#course-edit {
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+#course-edit:hover {
+  background-color: lightgrey;
 }
