@@ -1,13 +1,36 @@
 import React, { useState } from 'react';
-import { useRef } from 'react';
+import { useFormData } from '../../utilities/useFormData';
+import InputField from '../InputField/InputField';
 import Modal from '../Modal/Modal';
+import { timeParts } from '../../utilities/times';
+
+const validateCourseData = (key, val) => {
+  switch (key) {
+    case 'course-title':
+      return /(^\w\w)/.test(val) ? '' : 'must be least two characters';
+    case 'course-meets':
+      return !val || !!timeParts(val).days ? '' : 'must contain days and start-end, e.g., MWF 12:00-13:20';
+    default:
+      return '';
+  }
+};
 
 const CourseForm = ({ course, open, close }) => {
   const [title, setTitle] = useState('');
   const [meets, setMeets] = useState('');
+  const [state, change] = useFormData(validateCourseData, course);
+  const submit = (evt) => {
+    evt.preventDefault();
+    if (!state.errors) {
+      update(state.values);
+    }
+  };
+
   return (
     <Modal title={`${course.title}`} open={open} close={close}>
       <form
+        onSubmit={submit}
+        noValidate
         id="course-form"
         style={{
           display: 'flex',
@@ -15,42 +38,19 @@ const CourseForm = ({ course, open, close }) => {
           gap: '10px',
           margin: '1rem',
         }}
-        onSubmit={(e) => e.preventDefault()}
       >
-        <label style={{ width: '100%' }}>
-          Course Title
-          <input
-            style={{
-              display: 'block',
-              width: '100%',
-              border: 'solid 1px grey',
-              boxSizing: 'border-box',
-              borderRadius: '4px',
-              padding: '10px',
-              marginTop: '2px',
-            }}
-            id="course-title-input"
-            type="text"
-            onChange={(e) => setTitle(e.currentTarget.value)}
-          />
-        </label>
-        <label style={{ width: '100%' }}>
-          Meeting Time
-          <input
-            style={{
-              display: 'block',
-              width: '100%',
-              border: 'solid 1px grey',
-              boxSizing: 'border-box',
-              borderRadius: '4px',
-              padding: '10px',
-              marginTop: '2px',
-            }}
-            id="course-meeting-input"
-            type="text"
-            onChange={(e) => setMeets(e.currentTarget.value)}
-          />
-        </label>
+        <InputField
+          name="course-title"
+          text="Course Title"
+          state={state}
+          change={change}
+        />
+        <InputField
+          name="course-meets"
+          text="Meeting Time"
+          state={state}
+          change={change}
+        />
       </form>
       <div
         style={{
@@ -71,20 +71,6 @@ const CourseForm = ({ course, open, close }) => {
           }}
         >
           Cancel
-        </button>
-        <button
-          form="course-form"
-          onClick={close}
-          style={{
-            padding: '0.5rem 2rem',
-            backgroundColor: 'grey',
-            border: 'none',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            color: 'white',
-          }}
-        >
-          Submit
         </button>
       </div>
     </Modal>

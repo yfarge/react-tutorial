@@ -1,0 +1,15 @@
+.form-label {
+  display: block;
+}
+
+.invalid-feedback {
+  color: #ED4337;
+  font-size: 13px;
+}
+
+.form-control {
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  padding: 5px 10px;
+}

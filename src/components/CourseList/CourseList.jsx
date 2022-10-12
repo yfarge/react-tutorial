@@ -56,6 +56,7 @@ const CourseList = ({ courses }) => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 padding: '20%',
+                textAlign: 'center',
               }}
             >
               <b style={{ fontSize: '20px' }}>No courses selected...</b>
