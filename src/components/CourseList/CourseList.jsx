@@ -55,7 +55,7 @@ const CourseList = ({ courses }) => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                height: '100%',
+                padding: '20%',
               }}
             >
               <b style={{ fontSize: '20px' }}>No courses selected...</b>
