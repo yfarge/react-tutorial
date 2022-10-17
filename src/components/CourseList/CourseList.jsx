@@ -11,7 +11,7 @@ const CourseList = ({ courses }) => {
   const openSchedule = () => setOpen(true);
   const closeSchedule = () => setOpen(false);
   const termCourses = Object.values(courses).filter(
-    (course) => course.term === term
+    (course) => course.id.at(0) === term.at(0)
   );
 
   return (

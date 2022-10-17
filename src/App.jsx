@@ -1,17 +1,18 @@
 import Banner from './components/Banner/Banner';
 import CourseList from './components/CourseList/CourseList';
-import { useJsonQuery } from './utilities/fetch';
+import { useDbData } from './utilities/firebase';
 import { mapValues } from './utilities/schedule-helpers';
 import { addCourseTimes } from './utilities/times';
 
 const App = () => {
-  const [data, isLoading, error] = useJsonQuery(
-    'https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php'
-  );
+  const [data, error] = useDbData('/');
 
-  if (error) return <h1>Error loading user data: {`${error}`}</h1>;
-  if (isLoading) return <h1>Loading user data...</h1>;
-  if (!data) return <h1>No user data found</h1>;
+  if (error) return <h1>Error loading data: {error.toString()}</h1>;
+  if (data === undefined) return <h1>Loading data...</h1>;
+  if (!data) return <h1>No data found</h1>;
+
+  const processedData = mapValues(addCourseTimes, data.courses);
+  console.log(processedData);
 
   return (
     <div
@@ -22,7 +23,7 @@ const App = () => {
       }}
     >
       <Banner title={data.title} />
-      <CourseList courses={mapValues(addCourseTimes, data.courses)} />
+      <CourseList courses={processedData} />
     </div>
   );
 };
