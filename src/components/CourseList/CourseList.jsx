@@ -3,6 +3,7 @@ import Course from '../Course/Course';
 import TermFilter from '../TermFilter/TermFilter';
 import './CourseList.css';
 import Modal from '../Modal/Modal';
+import { getCourseTerm } from '../../utilities/course-constants';
 
 const CourseList = ({ courses }) => {
   const [term, setTerm] = useState('Fall');
@@ -11,7 +12,7 @@ const CourseList = ({ courses }) => {
   const openSchedule = () => setOpen(true);
   const closeSchedule = () => setOpen(false);
   const termCourses = Object.values(courses).filter(
-    (course) => course.id.at(0) === term.at(0)
+    (course) => getCourseTerm(course) === term
   );
 
   return (
@@ -32,7 +33,7 @@ const CourseList = ({ courses }) => {
           {selected.length ? (
             selected.map((course) => (
               <div
-                key={course.term + course.number}
+                key={course.term.at(0) + course.number}
                 style={{
                   padding: '15px 30px',
                   fontSize: '16px',
@@ -40,9 +41,7 @@ const CourseList = ({ courses }) => {
                 }}
               >
                 <div>
-                  <b>
-                    {course.term} {course.number}:{' '}
-                  </b>
+                  <b> CS {course.term.at(0) + course.number}: </b>
                   {course.title}
                 </div>
                 <div>{course.meets}</div>

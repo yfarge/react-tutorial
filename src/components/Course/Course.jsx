@@ -32,7 +32,7 @@ const Course = ({ course, selected, setSelected }) => {
         style={{ display: 'flex', justifyContent: 'space-between' }}
         className="course-header"
       >
-        CS {course.id.slice(1)}
+        CS {course.number}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
