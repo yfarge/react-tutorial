@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useAuthState } from '../../utilities/firebase';
+import { useProfile } from '../../utilities/profile';
 import { hasConflict } from '../../utilities/times';
 import CourseForm from '../CourseForm/CourseForm';
 import './Course.css';
 
 const Course = ({ course, selected, setSelected }) => {
-  const [user] = useAuthState();
+  const [{ user, isAdmin }, isLoading, error] = useProfile();
   const [open, setOpen] = useState(false);
   const openForm = () => setOpen(true);
   const closeForm = () => setOpen(false);
@@ -35,7 +35,7 @@ const Course = ({ course, selected, setSelected }) => {
         className="course-header"
       >
         CS {course.number}
-        {!!user && (
+        {isAdmin && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
