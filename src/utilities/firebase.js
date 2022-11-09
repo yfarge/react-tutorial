@@ -6,9 +6,14 @@ import {
   getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithCredential,
   signInWithPopup,
   signOut,
 } from 'firebase/auth';
+
+import { connectAuthEmulator } from 'firebase/auth';
+import { connectDatabaseEmulator } from 'firebase/database';
+import { useCallback } from 'react';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDjtzK_b1ji20nZ3tNs7NulV2gODuOHOQw',
@@ -20,11 +25,23 @@ const firebaseConfig = {
   measurementId: 'G-VXRY793RHS',
 };
 
-import { useCallback } from 'react';
-
-// Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
+const auth = getAuth(firebase);
 const database = getDatabase(firebase);
+
+if (!window.EMULATION && import.meta.env['VITE_EMULATE']) {
+  connectAuthEmulator(auth, 'http://127.0.0.1:9099');
+  connectDatabaseEmulator(database, '127.0.0.1', 9000);
+
+  signInWithCredential(
+    auth,
+    GoogleAuthProvider.credential(
+      '{"sub": "xlscwJDZGCrH1EtIZ0kEXpWtEuyg", "email": "tester@gmail.com", "displayName":"Test User", "email_verified": true}'
+    )
+  );
+
+  window.EMULATION = true;
+}
 
 export const useDbData = (path) => {
   const [data, setData] = useState();
