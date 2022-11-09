@@ -27,6 +27,7 @@ const Course = ({ course, selected, setSelected }) => {
   return (
     <div
       className="container"
+      data-cy="course"
       onClick={() => !isDisabled && toggle()}
       style={style}
     >
@@ -34,7 +35,7 @@ const Course = ({ course, selected, setSelected }) => {
         style={{ display: 'flex', justifyContent: 'space-between' }}
         className="course-header"
       >
-        CS {course.number}
+        {course.term} CS {course.number}
         {isAdmin && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
